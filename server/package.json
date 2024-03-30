@@ -1,0 +1,33 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "COMP308 Group2 project",
+  "main": "server.js",
+  "scripts": {
+    "test": "nodemon server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErykushBadu/COMP308-Group2.git"
+  },
+  "keywords": [
+    "Express",
+    "MongoDB",
+    "GraphQL",
+    "React"
+  ],
+  "author": "Group 2",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ErykushBadu/COMP308-Group2/issues"
+  },
+  "homepage": "https://github.com/ErykushBadu/COMP308-Group2#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "graphql": "^16.8.1",
+    "mongoose": "^8.2.4",
+    "nodemon": "^3.1.0"
+  }
+}
