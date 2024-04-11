@@ -1,11 +1,11 @@
-const express = require('express');
-const { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require('graphql');
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const cors = require('cors');
-const Nurse = require('../models/nurse.model');
+const express = require("express");
+const { graphqlHTTP } = require("express-graphql");
+const { buildSchema } = require("graphql");
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const cors = require("cors");
+const Nurse = require("../models/nurse.model");
 
 // Create an Express app
 const app = express();
@@ -18,7 +18,7 @@ const schema = buildSchema(`
   type Nurse {
     id: ID!
     username: String!
-    role: String!
+
   }
 
   type Query {
@@ -26,7 +26,7 @@ const schema = buildSchema(`
   }
 
   type Mutation {
-    registerNurse(username: String!, password: String!, role: String!): Nurse
+    registerNurse(username: String!, password: String!): Nurse
     loginNurse(username: String!, password: String!): Nurse
   }
 `);
@@ -38,21 +38,20 @@ const root = {
       const nurse = await Nurse.findById(id);
       return nurse;
     } catch (error) {
-      throw new Error('Nurse not found');
+      throw new Error("Nurse not found");
     }
   },
-  registerNurse: async ({ username, password, role }) => {
+  registerNurse: async ({ username, password }) => {
     try {
       const existingNurse = await Nurse.findOne({ username });
       if (existingNurse) {
-        throw new Error('Username is already taken');
+        throw new Error("Username is already taken");
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
       const newNurse = new Nurse({
         username,
         password: hashedPassword,
-        role
       });
       const savedNurse = await newNurse.save();
       return savedNurse;
@@ -64,37 +63,40 @@ const root = {
     try {
       const nurse = await Nurse.findOne({ username });
       if (!nurse) {
-        throw new Error('Nurse not found');
+        throw new Error("Nurse not found");
       }
 
       const isPasswordValid = await bcrypt.compare(password, nurse.password);
       if (!isPasswordValid) {
-        throw new Error('Invalid password');
+        throw new Error("Invalid password");
       }
 
-      const token = jwt.sign({ nurseId: nurse.id }, 'your_secret_key', {
-        expiresIn: '1h'
+      const token = jwt.sign({ nurseId: nurse.id }, "your_secret_key", {
+        expiresIn: "1h",
       });
       return { ...nurse.toJSON(), token };
     } catch (error) {
       throw new Error(error.message);
     }
-  }
+  },
 };
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Define GraphQL endpoint
-app.use('/graphql', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true, // Enable GraphiQL for easy testing
-}));
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true, // Enable GraphiQL for easy testing
+  })
+);
 
 // Define route for nurse registration
-app.post('/registerNurse', async (req, res) => {
-  const { username, password, role } = req.body;
+app.post("/registerNurse", async (req, res) => {
+  const { username, password } = req.body;
   try {
     const result = await root.registerNurse({ username, password });
     res.json(result);
@@ -104,7 +106,7 @@ app.post('/registerNurse', async (req, res) => {
 });
 
 // Define route for nurse login
-app.post('/loginNurse', async (req, res) => {
+app.post("/loginNurse", async (req, res) => {
   const { username, password } = req.body;
   try {
     const result = await root.loginNurse({ username, password });
@@ -115,10 +117,11 @@ app.post('/loginNurse', async (req, res) => {
 });
 
 // Connect to MongoDB and start server
-mongoose.connect('mongodb://localhost:27017/nurse')
+mongoose
+  .connect("mongodb://localhost:27017/nurse")
   .then(() => {
     app.listen(port, () => {
       console.log(`GraphQL server running at http://localhost:${port}/graphql`);
     });
   })
-  .catch(err => console.error(err));
+  .catch((err) => console.error(err));
