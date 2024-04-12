@@ -60,8 +60,10 @@ const root = {
     }
   },
   loginNurse: async ({ username, password }) => {
+    console.log("Login Nurse from microservice");
     try {
       const nurse = await Nurse.findOne({ username });
+      console.log("Nurse found:", nurse);
       if (!nurse) {
         throw new Error("Nurse not found");
       }
@@ -74,7 +76,7 @@ const root = {
       const token = jwt.sign({ nurseId: nurse.id }, "your_secret_key", {
         expiresIn: "1h",
       });
-      return { ...nurse.toJSON(), token };
+      return nurse;
     } catch (error) {
       throw new Error(error.message);
     }
