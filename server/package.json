@@ -4,8 +4,7 @@
   "description": "COMP308 Group2 project",
   "main": "server.js",
   "scripts": {
-    "test": "nodemon server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server-api-gateway.js"
   },
   "repository": {
     "type": "git",
