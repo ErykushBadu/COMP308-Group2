@@ -23,13 +23,13 @@ function Login() {
       const { data } = await Login({
         variables: { username, password },
       });
-
       // Process the response
       if (data && data.loginNurse) {
-        console.log("Data from login mutation:", data);
-        // navigate(data.loginNurse ? "/login" : "/register");
+        alert("Login successful");
+        // navigate("/nurse-page");
       }
     } catch (error) {
+      alert(`Login failed ${error.message}`);
       console.error("Error during authentication:", error);
     }
   };

@@ -29,7 +29,6 @@ function Register() {
     e.preventDefault();
 
     try {
-      console.log("user...", { ...user });
       const newUser = { ...user };
       const { data } = await Register({
         variables: {
