@@ -86,7 +86,7 @@ function Register() {
         </Form.Group>
 
         <br />
-        <Button size="sm" variant="success" type="submit">
+        <Button size="sm" variant="success" type="Button" onClick={saveUser}>
           Save
         </Button>
       </Form>

@@ -12,21 +12,23 @@ const GET_PATIENTS = gql`
       id
       username
       password
-      role
     }
   }
 `;
 
+
 // React component listing patients
 function PatientList() {
+  
+  /*
   const { loading, error, data, refetch } = useQuery(GET_PATIENTS);
 
   if (loading) return <Spinner animation="border" />;
   if (error) return <p>Error :</p>;
+  */
 
-  return (
-    <div>
-      <Table>
+  /* code to display patients in table (not working)
+  <Table>
         <thead>
           <tr>
             <th>Username</th>
@@ -42,6 +44,10 @@ function PatientList() {
           ))}
         </tbody>
       </Table>
+  */
+
+  return (
+    <div>
 
       <div className="center"> </div>
       <Link to="/enter-vitals">

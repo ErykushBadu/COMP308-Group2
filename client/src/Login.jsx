@@ -26,7 +26,7 @@ function Login() {
       // Process the response
       if (data && data.loginNurse) {
         alert("Login successful");
-        // navigate("/nurse-page");
+        navigate("/nurse-page");
       }
     } catch (error) {
       alert(`Login failed ${error.message}`);
