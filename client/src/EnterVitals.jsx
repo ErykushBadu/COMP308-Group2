@@ -1,52 +1,54 @@
-import React from 'react';
-import { gql, useMutation } from "@apollo/client";
-import { useNavigate } from 'react-router-dom';
-import { Container, Form, Button, Row, Col } from 'react-bootstrap'; // Import react-bootstrap components
-
-
-// mutation to add a new student
-const ENTER_VITALS = gql`
-    mutation EnterVitals(
-            $patientId: ID!, $bodyTemperature: Float, $heartRate: Int, $bloodPressure: String, $respiratoryRate: Int, $recordedAt: String) {
-            AddVitalSigns (
-                patientId: $patientId, bodyTemperature: $bodyTemperature, heartRate: $heartRate, 
-                bloodPressure: $bloodPressure, respiratoryRate: $respiratoryRate, recordedAt: $recordedAt) {
-                    id
-                    patientId
-                    bodyTemperature
-                    heartRate
-                    bloodPressure
-                    respiratoryRate
-                    recordedAt
-                }
-        }`;
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 
 function EnterVitals() {
-    let navigate = useNavigate();
-    const [EnterVitals] = useMutation(ENTER_VITALS);
-    const [patientId, setPatientId] = React.useState('');
-    const [bodyTemperature, setBodyTemperature] = React.useState('');
-    const [heartRate, setHeartRate] = React.useState('');
-    const [bloodPressure, setBloodPressure] = React.useState('');
-    const [respiratoryRate, setRespiratoryRate] = React.useState('');
-    const [recordedAt, setRecordedAt] = React.useState('');
+    const [patientId, setPatientId] = useState('');
+    const [bodyTemperature, setBodyTemperature] = useState('');
+    const [heartRate, setHeartRate] = useState('');
+    const [bloodPressure, setBloodPressure] = useState('');
+    const [respiratoryRate, setRespiratoryRate] = useState('');
+    const [recordedAt, setRecordedAt] = useState('');
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        EnterVitals({ variables: { patientId, bodyTemperature, heartRate, bloodPressure, respiratoryRate, recordedAt } });
-        setPatientId('');
-        setBodyTemperature('');
-        setHeartRate('');
-        setBloodPressure('');
-        setRespiratoryRate('');
-        setRecordedAt('');
-        navigate("/nurse-page");
-    }
+        try {
+            const response = await axios.post('http://localhost:3004/addVitalSign', {
+                patientId,
+                bodyTemperature: parseFloat(bodyTemperature),
+                heartRate: parseInt(heartRate),
+                bloodPressure,
+                respiratoryRate: parseInt(respiratoryRate),
+                recordedAt
+            });
+            console.log('Results from EnterVitals:', response.data);
+            setPatientId('');
+            setBodyTemperature('');
+            setHeartRate('');
+            setBloodPressure('');
+            setRespiratoryRate('');
+            setRecordedAt('');
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <Container>
             <h2>Enter Vital Signs</h2>
             <Form onSubmit={handleSubmit}>
+
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm={2}>Patient ID</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Patient ID"
+                            value={patientId}
+                            onChange={(e) => setPatientId(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
 
                 <Form.Group as={Row} className="mb-3">
                     <Form.Label column sm={2}>Body Temperature</Form.Label>
@@ -92,6 +94,18 @@ function EnterVitals() {
                             placeholder="Respiratory Rate"
                             value={respiratoryRate}
                             onChange={(e) => setRespiratoryRate(e.target.value)}
+                        />
+                    </Col>
+                </Form.Group>
+
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column sm={2}>Recorded At</Form.Label>
+                    <Col sm={10}>
+                        <Form.Control
+                            type="text"
+                            placeholder="Recorded At"
+                            value={recordedAt}
+                            onChange={(e) => setRecordedAt(e.target.value)}
                         />
                     </Col>
                 </Form.Group>

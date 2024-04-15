@@ -1,30 +1,21 @@
 import React from "react";
-import { gql, useMutation } from "@apollo/client";
-import { useNavigate } from "react-router-dom";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
-
-const LOGIN_USER = gql`
-  mutation loginNurse($username: String!, $password: String!) {
-    loginNurse(username: $username, password: $password) {
-      id
-      username
-    }
-  }
-`;
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   let navigate = useNavigate();
-  const [Login] = useMutation(LOGIN_USER);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
 
   const authenticateUser = async () => {
     try {
-      const { data } = await Login({
-        variables: { username, password },
+      const response = await axios.post("http://localhost:3004/loginNurse", {
+        username,
+        password,
       });
-      // Process the response
-      if (data && data.loginNurse) {
+      const data = response.data;
+      if (data) {
         alert("Login successful");
         navigate("/nurse-page");
       }
@@ -33,6 +24,7 @@ function Login() {
       console.error("Error during authentication:", error);
     }
   };
+
   return (
     <Container>
       <Row>
@@ -64,7 +56,7 @@ function Login() {
             <Button
               size="sm"
               variant="success"
-              type="Button"
+              type="button"
               onClick={authenticateUser}
             >
               Login
