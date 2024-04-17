@@ -16,7 +16,6 @@ function Login() {
       });
       const data = response.data;
       if (data) {
-        alert("Login successful");
         navigate("/nurse-page");
       }
     } catch (error) {

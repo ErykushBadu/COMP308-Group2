@@ -1,9 +1,9 @@
-const express = require('express');
-const { graphqlHTTP } = require('express-graphql');
-const { buildSchema } = require('graphql');
-const mongoose = require('mongoose');
-const VitalSign = require('../models/vitalsigns.model');
-const cors = require('cors');
+const express = require("express");
+const { graphqlHTTP } = require("express-graphql");
+const { buildSchema } = require("graphql");
+const mongoose = require("mongoose");
+const VitalSign = require("../models/vitalsigns.model");
+const cors = require("cors");
 
 const app = express();
 const port = 3003;
@@ -21,11 +21,11 @@ const schema = buildSchema(`
     heartRate: Int
     bloodPressure: String
     respiratoryRate: Int
-    recordedAt: String
+ 
   }
 
   type Query {
-    vitalSigns: [VitalSign]
+    vitalSigns(patientId:String!): [VitalSign]
   }
 
   input VitalSignInput {
@@ -34,7 +34,6 @@ const schema = buildSchema(`
     heartRate: Int
     bloodPressure: String
     respiratoryRate: Int
-    recordedAt: String
   }
 
   type Mutation {
@@ -44,8 +43,11 @@ const schema = buildSchema(`
 `);
 
 const root = {
-  vitalSigns: async () => {
-    return await VitalSign.find();
+  // vitalSigns: async () => {
+  //   return await VitalSign.find();
+  // },
+  vitalSigns: async ({ patientId }) => {
+    return await VitalSign.find({ patientId });
   },
   addVitalSign: async ({ input }) => {
     const newVitalSign = new VitalSign(input);
@@ -54,18 +56,21 @@ const root = {
   },
   updateVitalSign: async ({ id, input }) => {
     return await VitalSign.findByIdAndUpdate(id, input, { new: true });
-  }
+  },
 };
 
 // GraphQL endpoint
-app.use('/graphql', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true
-}));
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true,
+  })
+);
 
 // Route for adding a vital sign
-app.post('/addvitals', async (req, res) => {
+app.post("/addvitals", async (req, res) => {
   try {
     const newVitalSign = new VitalSign(req.body);
     await newVitalSign.save();
@@ -76,12 +81,14 @@ app.post('/addvitals', async (req, res) => {
 });
 
 // Route for updating a vital sign
-app.put('/updatevitals/:id', async (req, res) => {
+app.put("/updatevitals/:id", async (req, res) => {
   const { id } = req.params;
   try {
-    const updatedVitalSign = await VitalSign.findByIdAndUpdate(id, req.body, { new: true });
+    const updatedVitalSign = await VitalSign.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     if (!updatedVitalSign) {
-      return res.status(404).json({ error: 'Vital sign not found' });
+      return res.status(404).json({ error: "Vital sign not found" });
     }
     res.json(updatedVitalSign);
   } catch (error) {
@@ -89,10 +96,13 @@ app.put('/updatevitals/:id', async (req, res) => {
   }
 });
 
-mongoose.connect('mongodb://localhost:27017/vital-signs')
+mongoose
+  .connect("mongodb://localhost:27017/vital-signs")
   .then(() => {
     app.listen(port, () => {
-      console.log(`Vital signs microservice running at http://localhost:${port}/graphql`);
+      console.log(
+        `Vital signs microservice running at http://localhost:${port}/graphql`
+      );
     });
   })
-  .catch(err => console.error(err));
+  .catch((err) => console.error(err));

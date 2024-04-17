@@ -1,58 +1,62 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Spinner from "react-bootstrap/Spinner";
 import { Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import Button from "react-bootstrap/esm/Button";
 
-// query to get patients
-const GET_PATIENTS = gql`
-  query GetPatients {
-    patients {
-      id
-      username
-      password
-    }
-  }
-`;
-
+const getPatients = async () => {
+  const response = await fetch("http://localhost:3004/patients");
+  const data = await response.json();
+  return data;
+};
 
 // React component listing patients
 function PatientList() {
-  
-  /*
-  const { loading, error, data, refetch } = useQuery(GET_PATIENTS);
+  const [patients, setPatients] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  if (loading) return <Spinner animation="border" />;
-  if (error) return <p>Error :</p>;
-  */
+  useEffect(() => {
+    const fetchPatients = async () => {
+      setIsLoading(true);
+      const data = await getPatients();
+      setPatients(data);
+      setIsLoading(false);
+    };
+    fetchPatients();
+  }, []);
 
-  /* code to display patients in table (not working)
-  <Table>
+  if (isLoading) {
+    return <Spinner animation="border" />;
+  }
+
+  return (
+    <div>
+      <div className="center"> </div>
+      <h2>List of Patients</h2>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>Username</th>
-            <th>Password</th>
+            <th>First Name</th>
+            <th>Last Name</th>
           </tr>
         </thead>
         <tbody>
-          {data.patients.map((patient) => (
-            <tr key={patient.id}>
+          {patients.map((patient) => (
+            <tr key={patient._id}>
               <td>{patient.username}</td>
-              <td>{patient.password}</td>
+              <td>{patient.firstname}</td>
+              <td>{patient.lastname}</td>
+              <td>
+                <Link to={`/enter-vitals/${patient._id}`}>
+                  <Button variant="primary">Vital Signs</Button>
+                </Link>
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
-  */
-
-  return (
-    <div>
-
-      <div className="center"> </div>
-      <Link to="/enter-vitals">
-        <Button variant="primary">Enter Vital Signs</Button>
-      </Link>
     </div>
   );
 }
