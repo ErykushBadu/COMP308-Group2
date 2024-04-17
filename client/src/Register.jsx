@@ -40,42 +40,49 @@ function Register() {
 
   return (
     <Container>
-      <div className="home">
-        {showLoading && (
-          <Spinner animation="border" role="status">
-            <span className="sr-only">Loading...</span>
-          </Spinner>
-        )}
-        <Form className="form" onSubmit={saveUser}>
+      <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">  
+        <div className="bg-white p-4 roundedw-25">
           <h1>Nurse Registration</h1>
-          <Form.Group>
-            <Form.Label>User Name</Form.Label>
-            <Form.Control
-              type="text"
-              name="username"
-              id="username"
-              placeholder="Enter user name"
-              value={user.username}
-              onChange={onChange}
-            />
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Enter password"
-              value={user.password}
-              onChange={onChange}
-            />
-          </Form.Group>
 
-          <br />
-          <Button size="sm" variant="success" type="submit">
-            Save
-          </Button>
-        </Form>
+          <form className="form" onSubmit={saveUser}>
+
+          <div className="mb-3">
+            <label htmlFor="username">
+                <strong>User Name</strong>
+            </label>
+              <input
+                type="text"
+                name="username"
+                id="username"
+                placeholder="Enter user name"
+                value={user.username}
+                onChange={onChange}
+              />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="password">
+                <strong>Password</strong>
+            </label>
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="Enter password"
+                value={user.password}
+                onChange={onChange}
+              />
+          </div>
+
+            <br></br>
+            
+            <button type="submit" className="btn btn-success w-100 rounded-0">
+              Register
+            </button>
+
+          </form>
+
+        </div>
       </div>
     </Container>
   );

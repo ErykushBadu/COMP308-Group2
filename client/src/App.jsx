@@ -25,6 +25,9 @@ function App() {
               </div>
           </nav>
         </header>
+
+          <br></br>
+
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/login">
@@ -43,6 +46,8 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+
+      <br></br>
 
       <div>
         <Routes>

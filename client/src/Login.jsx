@@ -29,44 +29,49 @@ function Login() {
       <Row>
         <Col>
 
-          <h1>Nurse Login</h1>
+        <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">  
+            <div className="bg-white p-4 roundedw-25">
+              <h1>Nurse Login</h1>
 
-          <Form className="form">
-            
-            <Form.Group size="lg">
-              <Form.Label>User Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Enter user name"
-                className="form-control rounded-0"
-                onChange={(e) => setUsername(e.target.value)}
-              />
+              <form>
+                
+                <div className="mb-3">
+                  <label htmlFor="username">
+                        <strong>User Name</strong>
+                    </label>
+                    <input
+                      type="text"
+                      name="username"
+                      id="username"
+                      placeholder="Enter user name"
+                      className="form-control rounded-0"
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                </div>
 
-            </Form.Group>
-            <Form.Group size="lg">
-              <Form.Label>Password:</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                id="password"
-                placeholder="Enter password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </Form.Group>
+                <div className="mb-3">
+                  <label htmlFor="password">
+                        <strong>Password</strong>
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      id="password"
+                      placeholder="Enter password"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                </div>
 
-            <br />
-            <Button
-              size="sm"
-              variant="success"
-              type="button"
-              onClick={authenticateUser}
-            >
-              Login
-            </Button>
+                  <br />
+                  <button type="button" className="btn btn-success w-100 rounded-0" onClick={authenticateUser}>
+                    Login
+                  </button>
 
-          </Form>
+                </form>
+
+            </div>
+          </div>
+
 
         </Col>
       </Row>
