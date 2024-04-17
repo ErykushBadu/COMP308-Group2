@@ -16,8 +16,15 @@ function App() {
     <Router>
       <Navbar bg="primary" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="register">Nurse/Patient Application</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <header id ="header">
+          <nav>
+              <div className="container">
+                  <div className="container">
+                      <a href="/register" className="nav-brand text-dark">Nurse/Patient System</a>
+                 </div>
+              </div>
+          </nav>
+        </header>
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/login">
@@ -25,9 +32,6 @@ function App() {
               </Nav.Link>
               <Nav.Link as={Link} to="/register">
                 Register
-              </Nav.Link>
-              <Nav.Link as={Link} to="/enter-vitals">
-                Enter Vitals
               </Nav.Link>
               <Nav.Link as={Link} to="/nurse-page">
                 Nurse Page

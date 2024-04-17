@@ -28,8 +28,11 @@ function Login() {
     <Container>
       <Row>
         <Col>
+
           <h1>Nurse Login</h1>
+
           <Form className="form">
+            
             <Form.Group size="lg">
               <Form.Label>User Name</Form.Label>
               <Form.Control
@@ -37,8 +40,10 @@ function Login() {
                 name="username"
                 id="username"
                 placeholder="Enter user name"
+                className="form-control rounded-0"
                 onChange={(e) => setUsername(e.target.value)}
               />
+
             </Form.Group>
             <Form.Group size="lg">
               <Form.Label>Password:</Form.Label>
@@ -60,7 +65,9 @@ function Login() {
             >
               Login
             </Button>
+
           </Form>
+
         </Col>
       </Row>
     </Container>
