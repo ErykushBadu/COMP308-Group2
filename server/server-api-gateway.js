@@ -176,6 +176,50 @@ app.put("/updateVitalSign/:id", async (req, res) => {
   }
 });
 
+// Route for getting list of vital signs
+app.get("/vitalSigns", async (req, res) => {
+  try {
+    const response = await fetch(
+      `${serviceEndpoints["Vital Signs Microservice"]}/vitalSigns`
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Route for adding emergency alert
+app.post("/addAlert", async (req, res) => {
+  try {
+    const response = await fetch(
+      `${serviceEndpoints["Vital Signs Microservice"]}/addemergencyalert`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(req.body),
+      }
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Route for getting list of emergency alerts
+app.get("/emergencyalerts", async (req, res) => {
+  try {
+    const response = await fetch(
+      `${serviceEndpoints["Vital Signs Microservice"]}/emergencyalerts`
+    );
+    const data = await response.json();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 // Start the API gateway server
 app.listen(port, () => {
   console.log(`API gateway running at http://localhost:${port}`);
