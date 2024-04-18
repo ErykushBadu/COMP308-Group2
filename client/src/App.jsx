@@ -11,21 +11,25 @@ import EnterVitals from "./EnterVitals.jsx";
 import NursePage from "./NursePage.jsx";
 import PatientPage from "./PatientPage.jsx";
 import FitnessGames from "./FitnessGames.jsx";
+import PatientRegister from "./PatientRegister.jsx";
+import PatientLogin from "./PatientLogin.jsx";
 
 function App() {
   return (
     <Router>
       <Navbar bg="primary" variant="dark" expand="lg">
         <Container>
-        <header id ="header">
-          <nav>
+          <header id="header">
+            <nav>
               <div className="container">
-                  <div className="container">
-                      <a href="/register" className="nav-brand text-dark">Nurse/Patient System</a>
-                 </div>
+                <div className="container">
+                  <a href="/register" className="nav-brand text-dark">
+                    Nurse/Patient System
+                  </a>
+                </div>
               </div>
-          </nav>
-        </header>
+            </nav>
+          </header>
 
           <br></br>
 
@@ -39,6 +43,12 @@ function App() {
               </Nav.Link>
               <Nav.Link as={Link} to="/nurse-page">
                 Nurse Page
+              </Nav.Link>
+              <Nav.Link as={Link} to="/patient-register">
+                Patient Register
+              </Nav.Link>
+              <Nav.Link as={Link} to="/patient-login">
+                Patient Login
               </Nav.Link>
               <Nav.Link as={Link} to="/patient-page">
                 Patient Page
@@ -59,6 +69,8 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="nurse-page" element={<NursePage />} />
+          <Route path="patient-register" element={<PatientRegister />} />
+          <Route path="patient-login" element={<PatientLogin />} />
           <Route path="patient-page" element={<PatientPage />} />
           <Route path="enter-vitals/:patientId" element={<EnterVitals />} />
           <Route path="fitness-games" element={<FitnessGames />} />

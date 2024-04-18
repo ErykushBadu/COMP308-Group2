@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 
 function EnterVitals() {
   const { patientId } = useParams();
+  console.log("Patient ID:", patientId);
   const [show, setShow] = useState(false);
   const [vitalSigns, setVitalSigns] = useState([]);
   const [bodyTemperature, setBodyTemperature] = useState("");
@@ -53,11 +54,24 @@ function EnterVitals() {
 
   return (
     <div>
-      <Button variant="primary" onClick={handleShow}>
-        Enter New Vital Signs
-      </Button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Button variant="primary" onClick={handleShow}>
+          Enter New Vital Signs
+        </Button>
+      </div>
 
-      <Modal show={show} onHide={handleClose} size="lg">
+      <Modal
+        show={show}
+        onHide={handleClose}
+        size="lg"
+        className="centered-modal"
+      >
         <Modal.Header>
           <Modal.Title>Enter New Vital Signs</Modal.Title>
         </Modal.Header>
@@ -141,10 +155,10 @@ function EnterVitals() {
         <tbody>
           {vitalSigns.map((vitalSign, index) => (
             <tr key={index}>
-              <td>{vitalSign.bodyTemperature}</td>
-              <td>{vitalSign.heartRate}</td>
-              <td>{vitalSign.bloodPressure}</td>
-              <td>{vitalSign.respiratoryRate}</td>
+              <td className="text-center">{vitalSign.bodyTemperature}</td>
+              <td className="text-center">{vitalSign.heartRate}</td>
+              <td className="text-center">{vitalSign.bloodPressure}</td>
+              <td className="text-center">{vitalSign.respiratoryRate}</td>
             </tr>
           ))}
         </tbody>

@@ -16,7 +16,7 @@ function PatientLogin() {
       });
       const data = response.data;
       if (data) {
-        navigate("/patient-page");
+        navigate("/patient-page", { state: { patient_id: data._id } });
       }
     } catch (error) {
       alert(`Login failed ${error.message}`);
@@ -28,51 +28,49 @@ function PatientLogin() {
     <Container>
       <Row>
         <Col>
-
-        <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">  
+          <div className="d-flex justify-content-center align-items-center bg-secondary vh-100">
             <div className="bg-white p-4 roundedw-25">
               <h1>Patient Login</h1>
 
               <form>
-                
                 <div className="mb-3">
                   <label htmlFor="username">
-                        <strong>User Name</strong>
-                    </label>
-                    <input
-                      type="text"
-                      name="username"
-                      id="username"
-                      placeholder="Enter user name"
-                      className="form-control rounded-0"
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
+                    <strong>User Name</strong>
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    id="username"
+                    placeholder="Enter user name"
+                    className="form-control rounded-0"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
                 </div>
 
                 <div className="mb-3">
                   <label htmlFor="password">
-                        <strong>Password</strong>
-                    </label>
-                    <input
-                      type="password"
-                      name="password"
-                      id="password"
-                      placeholder="Enter password"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
+                    <strong>Password</strong>
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    id="password"
+                    placeholder="Enter password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
                 </div>
 
-                  <br />
-                  <button type="button" className="btn btn-success w-100 rounded-0" onClick={authenticateUser}>
-                    Login
-                  </button>
-
-                </form>
-
+                <br />
+                <button
+                  type="button"
+                  className="btn btn-success w-100 rounded-0"
+                  onClick={authenticateUser}
+                >
+                  Login
+                </button>
+              </form>
             </div>
           </div>
-
-
         </Col>
       </Row>
     </Container>

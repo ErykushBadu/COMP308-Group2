@@ -4,7 +4,7 @@ import Spinner from "react-bootstrap/Spinner";
 import { Link } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import Button from "react-bootstrap/esm/Button";
-import './assets/styles.css';
+import "./assets/styles.css";
 
 const getPatients = async () => {
   const response = await fetch("http://localhost:3004/patients");
@@ -33,40 +33,38 @@ function PatientList() {
 
   return (
     <div className="container">
-            <main id="site-main">
-               <div className="container">
-                   <div className="box-nav d-flex justify-between">
+      <main id="site-main">
+        <div className="container">
+          <div className="box-nav d-flex justify-between">
+            <h2>List of Patients</h2>
 
-                      <h2>List of Patients</h2>
-
-                      <Table striped bordered hover>
-                        <thead className="thead-dark">
-                          <tr>
-                            <th>Username</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Vital Signs</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {patients.map((patient) => (
-                            <tr key={patient._id}>
-                              <td>{patient.username}</td>
-                              <td>{patient.firstname}</td>
-                              <td>{patient.lastname}</td>
-                              <td>
-                                <Link to={`/enter-vitals/${patient._id}`}>
-                                  <Button variant="primary">Vital Signs</Button>
-                                </Link>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </Table>
-                      
-                    </div>
-                </div>
-            </main>
+            <Table striped bordered hover>
+              <thead className="thead-dark">
+                <tr>
+                  <th>Username</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Vital Signs</th>
+                </tr>
+              </thead>
+              <tbody>
+                {patients.map((patient) => (
+                  <tr key={patient._id}>
+                    <td>{patient.username}</td>
+                    <td>{patient.firstname}</td>
+                    <td>{patient.lastname}</td>
+                    <td>
+                      <Link to={`/enter-vitals/${patient._id}`}>
+                        <Button variant="primary">Vital Signs</Button>
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }
