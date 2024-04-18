@@ -1,10 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
-
+import "bootstrap/dist/css/bootstrap.css";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Container from "react-bootstrap/Container";
-
 import Login from "./Login.jsx";
 import Register from "./Register.jsx";
 import EnterVitals from "./EnterVitals.jsx";

@@ -52,3 +52,45 @@
   transform: translate(-50%, -50%);
   width: 80%;
 }
+
+.custom-modal .modal-content {
+  background-color: lightblue;
+  border-radius: 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+  max-width: 90%;
+}
+
+.my-modal .modal-dialog {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.my-form {
+  width: 100%; /* Make the form take up the full width of its container */
+  padding: 20px; /* Add some padding around the form */
+}
+
+.my-form .form-group {
+  margin-bottom: 20px; /* Add some space between form groups */
+}
+
+.my-form .form-control {
+  height: 40px; /* Increase the height of the form controls */
+  font-size: 16px; /* Increase the font size in the form controls */
+}

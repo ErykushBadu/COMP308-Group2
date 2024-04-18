@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Form, Button, Row, Col, Modal } from "react-bootstrap";
+import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import Modal from "react-bootstrap/Modal";
+import "./App.css";
 
 function EnterVitals() {
   const { patientId } = useParams();
@@ -70,78 +72,85 @@ function EnterVitals() {
         show={show}
         onHide={handleClose}
         size="lg"
-        className="centered-modal"
+        centered
+        style={{ backgroundColor: "lightblue" }}
       >
-        <Modal.Header>
-          <Modal.Title>Enter New Vital Signs</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm={2}>
-                Body Temperature
-              </Form.Label>
-              <Col sm={10}>
-                <Form.Control
-                  type="text"
-                  placeholder="Body Temp"
-                  value={bodyTemperature}
-                  onChange={(e) => setBodyTemperature(e.target.value)}
-                />
-              </Col>
-            </Form.Group>
+        <Container>
+          <Modal.Header>
+            <Modal.Title>Enter New Vital Signs</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={handleSubmit} className="my-form">
+              <Form.Group as={Row}>
+                <Form.Label column sm={2}>
+                  Body Temperature
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Body Temp"
+                    value={bodyTemperature}
+                    onChange={(e) => setBodyTemperature(e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
 
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm={2}>
-                Heart Rate
-              </Form.Label>
-              <Col sm={10}>
-                <Form.Control
-                  type="text"
-                  placeholder="Heart Rate"
-                  value={heartRate}
-                  onChange={(e) => setHeartRate(e.target.value)}
-                />
-              </Col>
-            </Form.Group>
+              <Form.Group as={Row}>
+                <Form.Label column sm={2}>
+                  Heart Rate
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Heart Rate"
+                    value={heartRate}
+                    onChange={(e) => setHeartRate(e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
 
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm={2}>
-                Blood Pressure
-              </Form.Label>
-              <Col sm={10}>
-                <Form.Control
-                  type="text"
-                  placeholder="Blood Pressure"
-                  value={bloodPressure}
-                  onChange={(e) => setBloodPressure(e.target.value)}
-                />
-              </Col>
-            </Form.Group>
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm={2}>
+                  Blood Pressure
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Blood Pressure"
+                    value={bloodPressure}
+                    onChange={(e) => setBloodPressure(e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
 
-            <Form.Group as={Row} className="mb-3">
-              <Form.Label column sm={2}>
-                Respiratory Rate
-              </Form.Label>
-              <Col sm={10}>
-                <Form.Control
-                  type="text"
-                  placeholder="Respiratory Rate"
-                  value={respiratoryRate}
-                  onChange={(e) => setRespiratoryRate(e.target.value)}
-                />
-              </Col>
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSubmit}>
-            Save
-          </Button>
-        </Modal.Footer>
+              <Form.Group as={Row} className="mb-3">
+                <Form.Label column sm={2}>
+                  Respiratory Rate
+                </Form.Label>
+                <Col sm={10}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Respiratory Rate"
+                    value={respiratoryRate}
+                    onChange={(e) => setRespiratoryRate(e.target.value)}
+                  />
+                </Col>
+              </Form.Group>
+            </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="secondary"
+              onClick={handleClose}
+              style={{ marginRight: "10px" }}
+            >
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleSubmit}>
+              Save
+            </Button>
+          </Modal.Footer>
+        </Container>
       </Modal>
       <table>
         <thead>

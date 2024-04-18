@@ -42,7 +42,6 @@ function PatientLogin() {
                     name="username"
                     id="username"
                     placeholder="Enter user name"
-                    className="form-control rounded-0"
                     onChange={(e) => setUsername(e.target.value)}
                   />
                 </div>
