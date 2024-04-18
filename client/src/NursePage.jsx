@@ -12,16 +12,25 @@ const getPatients = async () => {
   return data;
 };
 
+const getAlerts = async () => {
+  const response = await fetch("http://localhost:3004/emergencyalerts");
+  const data = await response.json();
+  return data;
+};
+
 // React component listing patients
 function PatientList() {
   const [patients, setPatients] = useState([]);
+  const [alerts, setAlerts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const fetchPatients = async () => {
       setIsLoading(true);
       const data = await getPatients();
+      const alertsData = await getAlerts();
       setPatients(data);
+      setAlerts(alertsData);
       setIsLoading(false);
     };
     fetchPatients();
@@ -58,6 +67,27 @@ function PatientList() {
                         <Button variant="primary">Vital Signs</Button>
                       </Link>
                     </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+          <div className="box-nav d-flex justify-between">
+            <h2>List of Alerts</h2>
+            <Table striped bordered hover>
+              <thead className="thead-dark">
+                <tr>
+                  <th>Username</th>
+                  <th>Message</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody>
+                {alerts.map((alert) => (
+                  <tr key={alert._id}>
+                    <td>{alert.username}</td>
+                    <td>{alert.message}</td>
+                    <td>{alert.created_at}</td>
                   </tr>
                 ))}
               </tbody>

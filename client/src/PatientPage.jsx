@@ -12,28 +12,40 @@ To Do:
 
 function PatientPage() {
   let navigate = useNavigate();
-  const [alert, setAlert] = useState("");
+  const [alert, setAlert] = useState({
+    username: "",
+    message: "",
+  });
 
   const location = useLocation();
   const patient_id = location.state ? location.state.patient_id : null;
+  const username = location.state ? location.state.username : null;
   const [showLoading, setShowLoading] = useState(false);
 
   const sendAlert = async (e) => {
     setShowLoading(true);
     e.preventDefault();
-
+  
     try {
-      const response = await axios.post(
-        "http://localhost:3004/addemergencyalert",
-        alert
-      );
+      console.log("Sending alert for patient ID:", patient_id);
+      console.log("Message:", alert.message);
+  
+      const response = await axios.post("http://localhost:3004/addemergencyalert", {
+        username: username,
+        message: alert.message
+      });
+  
       setShowLoading(false);
       console.log("Emergency Alert:", response.data);
     } catch (error) {
       setShowLoading(false);
-      console.error(error);
+      console.error("Error sending alert:", error);
+      if (error.response) {
+        console.error("Response data:", error.response.data);
+      }
     }
   };
+  
 
   return (
     <Container>
@@ -51,8 +63,10 @@ function PatientPage() {
                 type="textarea"
                 rows="10"
                 cols="50"
-                value={alert}
-                onChange={(e) => setAlert(e.target.value)}
+                name="message"
+                id="message"
+                value={alert.message}
+                onChange={(e) => setAlert({ ...alert, message: e.target.value })}
               ></textarea>
             </div>
 

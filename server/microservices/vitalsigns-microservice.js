@@ -3,7 +3,7 @@ const { graphqlHTTP } = require("express-graphql");
 const { buildSchema } = require("graphql");
 const mongoose = require("mongoose");
 const VitalSign = require("../models/vitalsigns.model");
-const EmergencyAlert = require("../models/emergencyAlert.model");
+const EmergencyAlert = require("../models/alert.model");
 const cors = require("cors");
 
 const app = express();
@@ -27,14 +27,14 @@ const schema = buildSchema(`
 
   type EmergencyAlert {
     id: ID!
-    patientId: ID!
+    username: String!
     message: String!
   }
 
   type Query {
     vitalSigns(patientId:String!): [VitalSign]
     getVitalSigns: [VitalSign]
-    emergencyAlerts(patientId: String!): [EmergencyAlert]
+    emergencyAlerts(username: String!): [EmergencyAlert]
     getEmergencyAlerts: [EmergencyAlert]
   }
 
@@ -47,7 +47,7 @@ const schema = buildSchema(`
   }
 
   input EmergencyAlertInput {
-    patientId: ID!
+    username: String!
     message: String!
   }
 

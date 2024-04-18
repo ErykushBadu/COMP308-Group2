@@ -190,7 +190,7 @@ app.get("/vitalSigns", async (req, res) => {
 });
 
 // Route for adding emergency alert
-app.post("/addAlert", async (req, res) => {
+app.post("/addemergencyalert", async (req, res) => {
   try {
     const response = await fetch(
       `${serviceEndpoints["Vital Signs Microservice"]}/addemergencyalert`,

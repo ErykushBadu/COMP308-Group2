@@ -16,7 +16,7 @@ function PatientLogin() {
       });
       const data = response.data;
       if (data) {
-        navigate("/patient-page", { state: { patient_id: data._id } });
+        navigate("/patient-page", { state: { patient_id: data._id, username: data.username } });
       }
     } catch (error) {
       alert(`Login failed ${error.message}`);

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const emergencyAlertSchema = new mongoose.Schema({
-  patientId: {
-    type: mongoose.Schema.Types.ObjectId,
+  username: {
+    type: String,
     ref: 'Patient',
     required: true
   },
