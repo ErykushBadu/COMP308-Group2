@@ -16,7 +16,46 @@ function FitnessGames() {
                 <h1>Fitness Games</h1>
             </div>
 
-            <p>It is getting late but I will add 3 games here with checkboxes for different activites</p>
+            <br></br>
+
+            <div className="container" align="left">
+                <h3>Cardiovascular Exercise Checklist</h3>
+                <ul>
+                    <li><input type="checkbox"/> 30 minutes of brisk walking</li>
+                    <li><input type="checkbox"/> 20 minutes of jogging</li>
+                    <li><input type="checkbox"/> 15 minutes of cycling</li>
+                    <li><input type="checkbox"/> 20 minutes of swimming</li>
+                    <li><input type="checkbox"/> 30 minutes of dancing</li>
+                </ul>
+            </div>
+
+            <br></br>
+
+            <div className="container" align="left">
+                <h3>Strength Training Exercise Checklist</h3>
+                <ul>
+                    <li><input type="checkbox"/> Push-ups</li>
+                    <li><input type="checkbox"/> Squats</li>
+                    <li><input type="checkbox"/> Deadlifts</li>
+                    <li><input type="checkbox"/> Bench Press</li>
+                    <li><input type="checkbox"/> Rows</li>
+                </ul>
+            </div>
+
+            <br></br>
+
+            <div className="container" align="left">
+                <h3>Flexibility Exercise Checklist</h3>
+                <ul>
+                    <li><input type="checkbox"/> Stretching</li>
+                    <li><input type="checkbox"/> Yoga</li>
+                    <li><input type="checkbox"/> Pilates</li>
+                    <li><input type="checkbox"/> Tai Chi</li>
+                    <li><input type="checkbox"/> Foam Rolling</li>
+                </ul>
+            </div>
+
+            
         </Container>
     );
 }

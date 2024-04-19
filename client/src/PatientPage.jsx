@@ -4,12 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Container, Form, Button, Row, Col } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 
-/*
-To Do:
-- Need to be able to send emergency alerts (currently returns a 404 error)
-- Create a Covid-19 checklist for the patient to fill out
-*/
-
 function PatientPage() {
   let navigate = useNavigate();
   const [alert, setAlert] = useState({
@@ -89,6 +83,55 @@ function PatientPage() {
           </form>
         </div>
       </div>
+
+      <div class="container">
+
+        <h1>COVID-19 Symptom Checklist</h1>
+
+        <form>
+          <label>
+              <input type="checkbox" name="symptom" value="fever"/> Fever
+          </label>
+          <br></br>
+          <label>
+              <input type="checkbox" name="symptom" value="cough"/> Cough
+          </label>
+          <br></br>
+          <label>
+              <input type="checkbox" name="symptom" value="shortness_of_breath"/> Shortness of breath or difficulty breathing
+          </label>
+          <br></br>
+          <label>
+              <input type="checkbox" name="symptom" value="fatigue"/> Fatigue
+          </label>
+          <br></br>
+          <label>
+              <input type="checkbox" name="symptom" value="muscle_or_body_aches"/> Muscle or body aches
+          </label>
+          <br></br>
+          <label>
+              <input type="checkbox" name="symptom" value="headache"/> Headache
+          </label>
+          <br></br>
+          <label>
+              <input type="checkbox" name="symptom" value="new_loss_of_taste_or_smell"/> Loss of taste or smell
+          </label>
+          <br></br>
+          <label>
+              <input type="checkbox" name="symptom" value="sore_throat"/> Sore throat
+          </label>
+          <br></br>
+          <label>
+              <input type="checkbox" name="symptom" value="congestion_or_runny_nose"/> Congestion or runny nose
+          </label>
+          <br></br>
+          <label>
+              <input type="checkbox" name="symptom" value="nausea_or_vomiting"/> Nausea or vomiting
+          </label>
+        </form>
+    
+      </div>
+
     </Container>
   );
 }
