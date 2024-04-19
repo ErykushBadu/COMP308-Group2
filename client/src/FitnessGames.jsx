@@ -3,12 +3,6 @@ import axios from "axios";
 import { Link, useNavigate } from 'react-router-dom';
 import { Container, Form, Button, Row, Col } from 'react-bootstrap';
 
-/*
-To Do:
-- Create 3 checklists of different exercise activities the patient can do
-*/
-
-
 function FitnessGames() {
     return (
         <Container>
